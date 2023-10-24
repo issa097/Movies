@@ -79,8 +79,10 @@ app.get("/hom", (request, response) => {
     res.on("end", function () {
       const body = Buffer.concat(chunks);
       console.log(body.toString());
-      let view = JSON.parse(body);
-      response.render("home.ejs", { movie: view });
+     const view = JSON.parse(body);
+      const filteredMovies = view.filter((movie) => movie.genre == "Drama");
+
+      response.render("home.ejs", { movie: filteredMovies });
     
     });
   });
